@@ -2,11 +2,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
-from framework.logger.logger import Logger
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
-logger = Logger(logger="BaseElement").getlog()
+from framework.logger.logger import Logger
+logger = Logger(__file__).getlog()
 
 from framework.Browser import *
 from abc import ABC

@@ -3,9 +3,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from framework.common import jsonGetter
 
-# from logger.logger import Logger
-
-# logger = Logger(logger="TC-quit").getlog()
 
 CONFIG = 'resources/config.json'
 BROWSERS = ["ChromeBrowser", "FireFoxBrowser"]

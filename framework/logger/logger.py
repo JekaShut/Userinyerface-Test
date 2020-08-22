@@ -9,7 +9,7 @@ BROWSER = jsonGetter.GetJson.getFile(CONFIG,"actualBrowser")
 
 class Logger:
     def __init__(self, logger):
-        self.logger = logging.getLogger(logger)
+        self.logger = logging.getLogger(os.path.basename(logger))
         self.logger.setLevel(logging.DEBUG)
         if os.path.exists("logs"):
             pass
