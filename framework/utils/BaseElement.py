@@ -11,7 +11,7 @@ logger = Logger(__file__).getlog()
 from framework.Browser import *
 from abc import ABC
 
-WaitTime = jsonGetter.GetJson.getFile(CONFIG,"WaitTime")
+WaitTime = jsonGetter.GetJson.getFile(CONFIG, "WaitTime")
 
 
 class BaseElement(ABC):
@@ -20,6 +20,7 @@ class BaseElement(ABC):
         self.locatorType = locatorType
         self.locator = locator
         self.driver = RunBrowser().driver
+        self.element = None
 
     def _find(self, WaitTime = WaitTime):
         '''
@@ -29,6 +30,7 @@ class BaseElement(ABC):
         wait = WebDriverWait(self.driver, WaitTime)
 
         try:
+            logger.info("Waiting for element")
             wait.until(EC.presence_of_element_located((self.locatorType, self.locator)))
         except TimeoutException:
             logger.warn("Cannot find such an element!" + self.locator)
