@@ -12,6 +12,10 @@ class Button(BaseElement):
         self._find()
         return self.element.text
 
+    def finds(self):
+        self._finds()
+        return self.elements
+
 class Input(BaseElement):
 
     def clear(self):
