@@ -1,5 +1,8 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
+from pajeObjects.pages.logic.gamePageLogic import Generate
+import os
+from pathlib import Path
 
 from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
@@ -10,14 +13,18 @@ class GamePage:
         self.cookieButtonXpath = "//div[@class='align__cell']/button"
         self.HideHelpXpath = "//span[@class='discrete']"
         self.TimerXpath = "//div[@class='timer timer--white timer--center']"
-        self.ExpectedTime = "00:00:00"
+        self.ExpectedTime = "00:00:00" #TODO: заменить тестовыми данными
         self.UnselectAll = "//label[@for='interest_unselectall']"
-        self.Pass = "6XD8io2LQLvTF4h8" #10 symb, 1UP, 1Num,
         self.PasswordFieldXpath = "//input[@placeholder='Choose Password']"
         self.EmailFieldXpath = "//input[@placeholder='Your email']"
         self.DomainFieldXpath = "//input[@placeholder='Domain']"
         self.DropDownField = "//div[@class='dropdown__field']"
-        self.DropDownElements = ""
+        self.DropDownelements = "//div[@class='dropdown__list-item']"
+        self.Checkbox = "//span[@class='checkbox__box']"
+        self.NextXpath = "//div[@class='align__cell button-container__secondary']/a[@class='button--secondary']"
+        self.Checkboxes = "//div[@class='avatar-and-interests__interests-list__item']"
+        self.NextButton = "//button[@class='button button--stroked button--white button--fluid']"
+        self.uploadImage = "//a[@class='avatar-and-interests__upload-button']"
 
     def removeCookie(self):
         ElementOperations.Button(By.XPATH, self.cookieButtonXpath).click()
@@ -30,13 +37,30 @@ class GamePage:
         return startTime
 
     def sendCreditals(self):
+        Pass = Generate.string()
         ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).clear()
-        ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).send(self.Pass)
+        ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).send(Pass)
+
         ElementOperations.Input(By.XPATH, self.EmailFieldXpath).clear()
-        ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).send(self.Pass)
+        ElementOperations.Input(By.XPATH, self.EmailFieldXpath).send(Pass)
+
         ElementOperations.Input(By.XPATH, self.DomainFieldXpath).clear()
-        ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).send(self.Pass)
+        ElementOperations.Input(By.XPATH, self.DomainFieldXpath).send(Pass)
+
         ElementOperations.Button(By.XPATH, self.DropDownField).click()
-        elements = ElementOperations.Button(By.XPATH, self).finds()
-        elements[2].click()
+        ElementOperations.DropDown(By.XPATH, self.DropDownelements).random().click()
+        ElementOperations.CheckBox(By.XPATH, self.Checkbox).click()
+        ElementOperations.Button(By.XPATH, self.NextXpath).click()
+
+    def clickNext(self):
+        ElementOperations.Button(By.XPATH, self.NextButton).click()
+
+    def unselectCheckboxes(self):
+        ElementOperations.CheckBox(By.XPATH, self.UnselectAll).click()
+
+    def selectRandomCheckbox(self):
+        ElementOperations.CheckBox(By.XPATH, self.Checkbox).random().click()
+
+    def uploadimage(self):
+        ElementOperations.Button(By.XPATH, self.uploadImage).send() #PATH
 

@@ -12,6 +12,8 @@ CONFIG = 'resources/config.json'
 
 SITE = jsonGetter.GetJson.getFile(CONFIG, "SITE")
 
+#TODO: Как отправить картинку в ссылку
+#TODO: Как найти что-нибудь в уже найденном элементе
 
 
 
@@ -23,6 +25,15 @@ class TestSuite1:
         LinkOperations(SITE).get()
         mainPage.MainPage().startGame()
         gamePage.GamePage().sendCreditals()
+        gamePage.GamePage().clickNext()
+
+        #gamePage.GamePage().uploadimage()
+        gamePage.GamePage().unselectCheckboxes()
+        gamePage.GamePage().selectRandomCheckbox()
+        gamePage.GamePage().selectRandomCheckbox()
+        gamePage.GamePage().selectRandomCheckbox()
+        gamePage.GamePage().clickNext()
+
         time.sleep(4)
 
 

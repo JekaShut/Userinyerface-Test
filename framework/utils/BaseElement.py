@@ -16,11 +16,11 @@ WaitTime = jsonGetter.GetJson.getFile(CONFIG, "WaitTime")
 
 class BaseElement(ABC):
 
-    def __init__(self, locatorType, locator):
+    def __init__(self, locatorType, locator,):
         self.locatorType = locatorType
         self.locator = locator
         self.driver = RunBrowser().driver
-        self.element = None
+
 
     def _find(self, WaitTime = WaitTime):
         '''
@@ -30,7 +30,7 @@ class BaseElement(ABC):
         wait = WebDriverWait(self.driver, WaitTime)
 
         try:
-            logger.info("Waiting for element")
+            logger.info("Waiting for element" + self.locator)
             wait.until(EC.presence_of_element_located((self.locatorType, self.locator)))
         except TimeoutException:
             logger.warn("Cannot find such an element!" + self.locator)
@@ -45,6 +45,7 @@ class BaseElement(ABC):
         '''
         wait = WebDriverWait(self.driver, WaitTime)
         try:
+            logger.info("Waiting for element" + self.locator)
             wait.until(EC.presence_of_element_located((self.locatorType, self.locator)))
         except TimeoutException:
             logger.warn("Cannot find such an element!" + self.locator)
@@ -64,5 +65,5 @@ class BaseElement(ABC):
         '''
         Moves mouse to an element
         '''
-        self.__find()
+        self._find()
         hov = ActionChains(self.driver).move_to_element((self.element)).perform()

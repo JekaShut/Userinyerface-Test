@@ -1,6 +1,6 @@
 from framework.utils.BaseElement import *
 from selenium.webdriver.common.by import By
-
+import random
 
 
 class Button(BaseElement):
@@ -12,9 +12,15 @@ class Button(BaseElement):
         self._find()
         return self.element.text
 
-    def finds(self):
-        self._finds()
-        return self.elements
+    def send(self, keys):
+        '''
+        :param keys: Text to send
+        :return: nothing
+        Entering a text to field
+        '''
+        self._find()
+        self.element.send_keys(keys)
+
 
 class Input(BaseElement):
 
@@ -43,6 +49,25 @@ class Label(BaseElement):
         '''
         self._find()
         return self.element.text
+
+class DropDown(BaseElement):
+    def random(self):
+        '''
+        :return: random element of dropdown
+        '''
+        element = self._finds()
+        element = random.choice(element)
+        return element
+
+
+class CheckBox(BaseElement):
+     def random(self):
+        '''
+        :return: random element of dropdown
+        '''
+        element = self._finds()
+        element = random.choice(element)
+        return element
 
 
 
