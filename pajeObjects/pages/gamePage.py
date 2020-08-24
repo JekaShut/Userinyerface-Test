@@ -32,6 +32,16 @@ class GamePage():
         self.NextButton = "//button[@class='button button--stroked button--white button--fluid']"
         self.uploadImage = "//a[@class='avatar-and-interests__upload-button']"
         self.cookiesDiv = "//div[@class='cookies']"
+        self.HelpHidden = "//div[@class='help-form is-hidden']"
+        self.Pageidentificator = "//div[@class='page-indicator']"
+        self.Page1Text = "1 / 4"
+        self.Page2Text = "2 / 4"
+        self.Page3Text = "3 / 4"
+        self.Page4Text = "4 / 4"
+
+    def checkPage(self):
+        text = ElementOperations.Label(By.XPATH, self.Pageidentificator).getText()
+        return text
 
     def removeCookie(self):
         elem = ElementOperations.Button(By.XPATH, self.cookieButtonXpath)._find()
@@ -43,7 +53,14 @@ class GamePage():
         return result
 
     def removeHelp(self):
+        elem = ElementOperations.Button(By.XPATH, self.HideHelpXpath)._find()
         ElementOperations.Button(By.XPATH, self.HideHelpXpath).click()
+        return elem
+
+    def checkHelp(self, elem):
+        elem = ElementOperations.Form(By.XPATH, self.HelpHidden)._find()
+        result = Check(elem).isDisplayed()
+        return result
 
     def checkTimer(self):
         startTime = ElementOperations.Label(By.XPATH, self.TimerXpath).getText()

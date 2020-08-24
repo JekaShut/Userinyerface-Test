@@ -7,6 +7,7 @@ logger = Logger(__file__).getlog()
 class MainPage():
     def __init__(self):
         self.startXpath = "//a[@class='start__link']"
+        self.EXtext = "HERE"
 
     def assertPage(self):
         text = ElementOperations.Button(By.XPATH, self.startXpath).getText()

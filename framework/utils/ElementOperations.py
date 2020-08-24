@@ -21,6 +21,10 @@ class Button(BaseElement):
         self.element.send_keys(keys)
 
 
+class Form(BaseElement):
+    pass
+
+
 class Input(BaseElement):
 
     def clear(self):
