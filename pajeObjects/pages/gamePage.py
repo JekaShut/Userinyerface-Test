@@ -1,6 +1,6 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
-
+from framework.Base import BaseForm
 from framework.Base.BaseForm import Check
 from framework.common import jsonGetter
 from framework.utils import SystemActions

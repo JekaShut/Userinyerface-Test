@@ -13,7 +13,7 @@ CONFIG = 'resources/config.json'
 
 SITE = jsonGetter.GetJson.getFile(CONFIG, "SITE")
 
-#TODO: добавить логгер
+
 
 
 @pytest.mark.usefixtures("get_driver")
