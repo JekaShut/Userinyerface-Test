@@ -1,10 +1,16 @@
+from framework.Base import BaseElement
+
 from framework.logger.logger import Logger
+logger = Logger(__file__).getlog()
 
-logger = Logger(logger="JavascriptPage").getlog()
+
+class BaseForm():
+    def __init__(self, elem):
+        self.elem = elem
+
+class Check(BaseForm):
+    def isDisplayed(self):
+        result = self.elem.is_displayed()
+        return result
 
 
-class BaseForm:
-    def __init__(self, locatorType= "", locator= "", pageName= ""):
-        self.locatorType = locatorType
-        self.locator = locator
-        self.pageName = pageName

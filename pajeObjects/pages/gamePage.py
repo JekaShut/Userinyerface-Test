@@ -1,7 +1,7 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
 from pajeObjects.pages.logic.gamePageLogic import Generate
-from framework.Base import BaseForm
+from framework.Base.BaseForm import Check
 from framework.common import jsonGetter
 from framework.utils import SystemActions
 import os
@@ -34,11 +34,13 @@ class GamePage():
         self.cookiesDiv = "//div[@class='cookies']"
 
     def removeCookie(self):
+        elem = ElementOperations.Button(By.XPATH, self.cookieButtonXpath)._find()
         ElementOperations.Button(By.XPATH, self.cookieButtonXpath).click()
+        return elem
 
-    def assertCookie(self):
-        #TODO: kak?
-        pass
+    def checkCookie(self, elem):
+        result = Check(elem).isDisplayed()
+        return result
 
     def removeHelp(self):
         ElementOperations.Button(By.XPATH, self.HideHelpXpath).click()

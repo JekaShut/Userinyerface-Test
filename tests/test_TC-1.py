@@ -21,33 +21,33 @@ SITE = jsonGetter.GetJson.getFile(CONFIG, "SITE")
 class TestSuite1:
 #TODO: добавить логгер
     # TODO: 1 assert ready
-    def test_one(self):
-        logger.info("Trying to open site " + SITE)
-        LinkOperations(SITE).get()
-        text = mainPage.MainPage().assertPage()
-        assert text == "HERE", "This is not expected page" #TODO: hardcode
-        mainPage.MainPage().startGame()
-        gamePage.GamePage().sendCreditals()
-        gamePage.GamePage().clickNext()
-
-        gamePage.GamePage().uploadimage()
-        gamePage.GamePage().unselectCheckboxes()
-        gamePage.GamePage().selectRandomCheckbox()
-        gamePage.GamePage().selectRandomCheckbox()
-        gamePage.GamePage().selectRandomCheckbox()
-        gamePage.GamePage().clickNext()
-
-        time.sleep(4)
-
-    # TODO: 1 assert ready
-    def test_two(self):
-        logger.info("Trying to open site " + SITE)
-        LinkOperations(SITE).get()
-        text = mainPage.MainPage().assertPage()
-        assert text == "HERE", "This is not expected page"  # TODO: hardcode
-        mainPage.MainPage().startGame()
-        gamePage.GamePage().removeHelp()
-        #TODO: добавить проверку того, что хелп уехал
+    #def test_one(self):
+    #    logger.info("Trying to open site " + SITE)
+    #    LinkOperations(SITE).get()
+    #    text = mainPage.MainPage().assertPage()
+    #    assert text == "HERE", "This is not expected page" #TODO: hardcode
+    #    mainPage.MainPage().startGame()
+    #    gamePage.GamePage().sendCreditals()
+    #    gamePage.GamePage().clickNext()
+#
+    #    gamePage.GamePage().uploadimage()
+    #    gamePage.GamePage().unselectCheckboxes()
+    #    gamePage.GamePage().selectRandomCheckbox()
+    #    gamePage.GamePage().selectRandomCheckbox()
+    #    gamePage.GamePage().selectRandomCheckbox()
+    #    gamePage.GamePage().clickNext()
+#
+    #    time.sleep(4)
+#
+    ## TODO: 1 assert ready
+    #def test_two(self):
+    #    logger.info("Trying to open site " + SITE)
+    #    LinkOperations(SITE).get()
+    #    text = mainPage.MainPage().assertPage()
+    #    assert text == "HERE", "This is not expected page"  # TODO: hardcode
+    #    mainPage.MainPage().startGame()
+    #    gamePage.GamePage().removeHelp()
+    #    #TODO: добавить проверку того, что хелп уехал
 
     # TODO: 1 assert ready
     def test_three(self):
@@ -56,7 +56,9 @@ class TestSuite1:
         text = mainPage.MainPage().assertPage()
         assert text == "HERE", "This is not expected page"  # TODO: hardcode
         mainPage.MainPage().startGame()
-        gamePage.GamePage().removeCookie()
+        elem = gamePage.GamePage().removeCookie()
+        result = gamePage.GamePage().checkCookie(elem)
+        assert result == False, "Cookie banner has not been closed"
         #TODO: добавить проверку того, что форма скрыта
 
     #TODO: asserts ready

@@ -67,9 +67,12 @@ class BaseElement(ABC):
         self._find()
         self.element.click()
 
+
     def move(self):
         '''
         Moves mouse to an element
         '''
         self._find()
         hov = ActionChains(self.driver).move_to_element((self.element)).perform()
+
+

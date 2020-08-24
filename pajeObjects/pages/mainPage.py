@@ -1,6 +1,5 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
-from framework.Base import BaseForm
 from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
 
