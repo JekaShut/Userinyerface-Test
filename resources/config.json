@@ -2,6 +2,7 @@
   "actualBrowser": "ChromeBrowser",
   "SITE": "https://userinyerface.com/game.html%20target=",
   "DIR": "\\[A1QA]\\TEMP",
+  "Files": "\\resources\\files",
   "LOCAL": "en",
   "WaitTime" : 35
 }

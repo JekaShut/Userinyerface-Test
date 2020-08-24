@@ -1,15 +1,21 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
 from pajeObjects.pages.logic.gamePageLogic import Generate
+from framework.Base import BaseForm
+from framework.common import jsonGetter
+from framework.utils import SystemActions
 import os
-from pathlib import Path
+import time
 
+from pathlib import Path
+from framework.Browser import *
 from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
 
 
-class GamePage:
+class GamePage():
     def __init__(self):
+        self.File = "\\img.jpg" #TODO: вынести в тестовые данные
         self.cookieButtonXpath = "//div[@class='align__cell']/button"
         self.HideHelpXpath = "//span[@class='discrete']"
         self.TimerXpath = "//div[@class='timer timer--white timer--center']"
@@ -25,9 +31,14 @@ class GamePage:
         self.Checkboxes = "//div[@class='avatar-and-interests__interests-list__item']"
         self.NextButton = "//button[@class='button button--stroked button--white button--fluid']"
         self.uploadImage = "//a[@class='avatar-and-interests__upload-button']"
+        self.cookiesDiv = "//div[@class='cookies']"
 
     def removeCookie(self):
         ElementOperations.Button(By.XPATH, self.cookieButtonXpath).click()
+
+    def assertCookie(self):
+        #TODO: kak?
+        pass
 
     def removeHelp(self):
         ElementOperations.Button(By.XPATH, self.HideHelpXpath).click()
@@ -62,5 +73,6 @@ class GamePage:
         ElementOperations.CheckBox(By.XPATH, self.Checkbox).random().click()
 
     def uploadimage(self):
-        ElementOperations.Button(By.XPATH, self.uploadImage).send() #PATH
+        ElementOperations.Button(By.XPATH, self.uploadImage).click()
+        SystemActions.SysOperations().upload(self.File)
 

@@ -1,5 +1,4 @@
-from framework.utils.BaseElement import *
-from selenium.webdriver.common.by import By
+from framework.Base.BaseElement import *
 import random
 
 

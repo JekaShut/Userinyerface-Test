@@ -1,5 +1,4 @@
-from framework.utils.BaseElement import *
-import pickle
+from framework.Base.BaseElement import *
 
 
 class Cookie():

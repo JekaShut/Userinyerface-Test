@@ -16,7 +16,7 @@ WaitTime = jsonGetter.GetJson.getFile(CONFIG, "WaitTime")
 
 class BaseElement(ABC):
 
-    def __init__(self, locatorType, locator,):
+    def __init__(self, locatorType, locator):
         self.locatorType = locatorType
         self.locator = locator
         self.driver = RunBrowser().driver

@@ -1,7 +1,5 @@
-from framework.utils.BaseElement import *
 from urllib.parse import urlparse
-from selenium.webdriver.common.action_chains import ActionChains
-from framework.utils.BaseElement import *
+from framework.Base.BaseElement import *
 
 BROWSER = jsonGetter.GetJson.getFile(CONFIG, "actualBrowser")
 WaitTime = jsonGetter.GetJson.getFile(CONFIG, "WaitTime")
