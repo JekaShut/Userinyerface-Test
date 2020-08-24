@@ -9,7 +9,7 @@ from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
 
 
-class GamePage():
+class GamePage(): #TODO: наслед от базы
     def __init__(self):
         self.File = "\\img.jpg" #TODO: вынести в тестовые данные
         self.cookieButtonXpath = "//div[@class='align__cell']/button"

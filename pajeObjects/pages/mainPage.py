@@ -5,7 +5,7 @@ from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
 
 
-class MainPage():
+class MainPage(): #TODO: наслед от базы
     def __init__(self):
         self.startXpath = "//a[@class='start__link']"
         self.EXtext = "HERE"
