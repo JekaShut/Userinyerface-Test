@@ -13,7 +13,6 @@ CONFIG = 'resources/config.json'
 
 SITE = jsonGetter.GetJson.getFile(CONFIG, "SITE")
 
-#TODO: Как отправить картинку в ссылку
 #TODO: Как найти что-нибудь в уже найденном элементе
 
 
