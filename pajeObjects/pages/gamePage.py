@@ -1,13 +1,9 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
-from pajeObjects.pages.logic.gamePageLogic import Generate
+
 from framework.Base.BaseForm import Check
 from framework.common import jsonGetter
 from framework.utils import SystemActions
-import os
-import time
-
-from pathlib import Path
 from framework.Browser import *
 from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
@@ -72,17 +68,17 @@ class GamePage():
         startTime = ElementOperations.Label(By.XPATH, self.TimerXpath).getText()
         return startTime
 
-    def sendCreditals(self):
+    def sendCreditals(self, passwd):
         logger.info("Trying to generate string")
-        Pass = Generate.string()
+
         ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).clear()
-        ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).send(Pass)
+        ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).send(passwd)
 
         ElementOperations.Input(By.XPATH, self.EmailFieldXpath).clear()
-        ElementOperations.Input(By.XPATH, self.EmailFieldXpath).send(Pass)
+        ElementOperations.Input(By.XPATH, self.EmailFieldXpath).send(passwd)
 
         ElementOperations.Input(By.XPATH, self.DomainFieldXpath).clear()
-        ElementOperations.Input(By.XPATH, self.DomainFieldXpath).send(Pass)
+        ElementOperations.Input(By.XPATH, self.DomainFieldXpath).send(passwd)
 
         ElementOperations.Button(By.XPATH, self.DropDownField).click()
         ElementOperations.DropDown(By.XPATH, self.DropDownelements).random().click()

@@ -2,7 +2,7 @@ from framework.common import jsonGetter
 from framework.utils import CookieOperations
 from framework.utils.BrowserActions import LinkOperations
 from pajeObjects.pages import mainPage, gamePage
-import time
+from pajeObjects.pages.logic.gamePageLogic import Generate
 
 import pytest
 
@@ -31,7 +31,8 @@ class TestSuite1:
         page = gamePage.GamePage().checkPage()
         pageOne = gamePage.GamePage().Page1Text
         assert page == pageOne, "This is not expected page"
-        gamePage.GamePage().sendCreditals()
+        passwd = Generate.string()
+        gamePage.GamePage().sendCreditals(passwd)
         gamePage.GamePage().clickNext()
 
         gamePage.GamePage().wait2page()
