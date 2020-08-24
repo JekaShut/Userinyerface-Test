@@ -65,6 +65,7 @@ class BaseElement(ABC):
         Find and click to element
         '''
         self._find()
+        logger.info("Trying to click an element")
         self.element.click()
 
 

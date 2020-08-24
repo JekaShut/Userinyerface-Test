@@ -33,6 +33,7 @@ class Input(BaseElement):
         Clear input textfield
         '''
         self._find()
+        logger.info("Trying to clear a field")
         self.element.clear()
 
     def send(self, keys):
@@ -51,6 +52,7 @@ class Label(BaseElement):
         :return: text of element
         '''
         self._find()
+        logger.info("Trying to get text of element")
         return self.element.text
 
 class DropDown(BaseElement):

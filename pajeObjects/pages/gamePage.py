@@ -35,15 +35,20 @@ class GamePage():
         self.HelpHidden = "//div[@class='help-form is-hidden']"
         self.Pageidentificator = "//div[@class='page-indicator']"
         self.Page1Text = "1 / 4"
+        self.Unic2 = "//p[@class='avatar-and-interests__text']"
+        self.Unic3 = "//div[@class='personal-details']"
         self.Page2Text = "2 / 4"
         self.Page3Text = "3 / 4"
         self.Page4Text = "4 / 4"
 
+
     def checkPage(self):
+
         text = ElementOperations.Label(By.XPATH, self.Pageidentificator).getText()
         return text
 
     def removeCookie(self):
+
         elem = ElementOperations.Button(By.XPATH, self.cookieButtonXpath)._find()
         ElementOperations.Button(By.XPATH, self.cookieButtonXpath).click()
         return elem
@@ -57,16 +62,18 @@ class GamePage():
         ElementOperations.Button(By.XPATH, self.HideHelpXpath).click()
         return elem
 
-    def checkHelp(self, elem):
+    def checkHelp(self):
         elem = ElementOperations.Form(By.XPATH, self.HelpHidden)._find()
         result = Check(elem).isDisplayed()
         return result
 
     def checkTimer(self):
+
         startTime = ElementOperations.Label(By.XPATH, self.TimerXpath).getText()
         return startTime
 
     def sendCreditals(self):
+        logger.info("Trying to generate string")
         Pass = Generate.string()
         ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).clear()
         ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).send(Pass)
@@ -83,15 +90,25 @@ class GamePage():
         ElementOperations.Button(By.XPATH, self.NextXpath).click()
 
     def clickNext(self):
+        logger.info("Trying to click NEXT button")
         ElementOperations.Button(By.XPATH, self.NextButton).click()
 
     def unselectCheckboxes(self):
+        logger.info("Trying to click unselect all button")
         ElementOperations.CheckBox(By.XPATH, self.UnselectAll).click()
 
     def selectRandomCheckbox(self):
+        logger.info("Trying to select a random checkbox")
         ElementOperations.CheckBox(By.XPATH, self.Checkbox).random().click()
 
     def uploadimage(self):
+        logger.info("Trying to upload an image")
         ElementOperations.Button(By.XPATH, self.uploadImage).click()
         SystemActions.SysOperations().upload(self.File)
+
+    def wait2page(self):
+        ElementOperations.Label(By.XPATH, self.Unic2)._find()
+
+    def wait3page(self):
+        ElementOperations.Label(By.XPATH, self.Unic3)._find()
 

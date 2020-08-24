@@ -34,6 +34,7 @@ class TestSuite1:
         gamePage.GamePage().sendCreditals()
         gamePage.GamePage().clickNext()
 
+        gamePage.GamePage().wait2page()
         pageTwo = gamePage.GamePage().Page2Text
         page = gamePage.GamePage().checkPage()
         assert page == pageTwo, "This is not expected page"
@@ -44,6 +45,7 @@ class TestSuite1:
         gamePage.GamePage().selectRandomCheckbox()
         gamePage.GamePage().clickNext()
 
+        gamePage.GamePage().wait3page()
         pageThree = gamePage.GamePage().Page3Text
         page = gamePage.GamePage().checkPage()
         assert page == pageThree, "This is not expected page"
@@ -57,8 +59,8 @@ class TestSuite1:
         EXtext = mainPage.MainPage().EXtext
         assert text == EXtext, "This is not expected page"
         mainPage.MainPage().startGame()
-        elem = gamePage.GamePage().removeHelp()
-        result = gamePage.GamePage().checkHelp(elem)
+        gamePage.GamePage().removeHelp()
+        result = gamePage.GamePage().checkHelp()
         assert result == True, "Form is not hidden"
 
 

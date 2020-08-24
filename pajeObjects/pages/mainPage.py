@@ -10,8 +10,10 @@ class MainPage():
         self.EXtext = "HERE"
 
     def assertPage(self):
+        logger.info("Trying to get text")
         text = ElementOperations.Button(By.XPATH, self.startXpath).getText()
         return text
 
     def startGame(self):
+        logger.info("Trying to click" + self.startXpath)
         ElementOperations.Button(By.XPATH, self.startXpath).click()
