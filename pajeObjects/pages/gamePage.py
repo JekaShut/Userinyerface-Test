@@ -1,6 +1,6 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
-from framework.Base import BaseForm
+from framework.Base.BaseForm import BaseForm
 from framework.Base.BaseForm import Check
 from framework.common import jsonGetter
 from framework.utils import SystemActions
@@ -9,13 +9,11 @@ from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
 
 
-class GamePage(): #TODO: наслед от базы
+class GamePage(BaseForm):
     def __init__(self):
-        self.File = "\\img.jpg" #TODO: вынести в тестовые данные
         self.cookieButtonXpath = "//div[@class='align__cell']/button"
         self.HideHelpXpath = "//span[@class='discrete']"
         self.TimerXpath = "//div[@class='timer timer--white timer--center']"
-        self.ExpectedTime = "00:00:00" #TODO: заменить тестовыми данными
         self.UnselectAll = "//label[@for='interest_unselectall']"
         self.PasswordFieldXpath = "//input[@placeholder='Choose Password']"
         self.EmailFieldXpath = "//input[@placeholder='Your email']"
@@ -23,6 +21,8 @@ class GamePage(): #TODO: наслед от базы
         self.DropDownField = "//div[@class='dropdown__field']"
         self.DropDownelements = "//div[@class='dropdown__list-item']"
         self.Checkbox = "//span[@class='checkbox__box']"
+        self.CheckboxClick = ""
+        self.CheckboxText = "../../../span[2]"
         self.NextXpath = "//div[@class='align__cell button-container__secondary']/a[@class='button--secondary']"
         self.Checkboxes = "//div[@class='avatar-and-interests__interests-list__item']"
         self.NextButton = "//button[@class='button button--stroked button--white button--fluid']"
@@ -50,6 +50,7 @@ class GamePage(): #TODO: наслед от базы
         return elem
 
     def checkCookie(self, elem):
+
         result = Check(elem).isDisplayed()
         return result
 
@@ -61,6 +62,7 @@ class GamePage(): #TODO: наслед от базы
     def checkHelp(self):
         elem = ElementOperations.Form(By.XPATH, self.HelpHidden)._find()
         result = Check(elem).isDisplayed()
+
         return result
 
     def checkTimer(self):
@@ -95,16 +97,31 @@ class GamePage(): #TODO: наслед от базы
 
     def selectRandomCheckbox(self):
         logger.info("Trying to select a random checkbox")
-        ElementOperations.CheckBox(By.XPATH, self.Checkbox).random().click()
+        elems = ElementOperations.CheckBox(By.XPATH, self.Checkbox)._finds()
+        x = []
+        for elem in elems:
+            text = ElementOperations.CheckBox(By.XPATH, self.CheckboxText, elem).getText()
+            if text == "Select all" or text == "Unselect all":
+                pass
+            else:
+                x.append(elem)
+        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
+        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
+        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
 
-    def uploadimage(self):
+
+
+        #ElementOperations.CheckBox(By.XPATH, self.Checkbox, elems).random().click()
+
+    def uploadimage(self, img):
         logger.info("Trying to upload an image")
         ElementOperations.Button(By.XPATH, self.uploadImage).click()
-        SystemActions.SysOperations().upload(self.File)
+        SystemActions.SysOperations().upload(img)
 
     def wait2page(self):
         ElementOperations.Label(By.XPATH, self.Unic2)._find()
 
     def wait3page(self):
         ElementOperations.Label(By.XPATH, self.Unic3)._find()
+
 

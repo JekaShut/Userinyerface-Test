@@ -20,7 +20,9 @@ class BaseElement(ABC):
         self.locatorType = locatorType
         self.locator = locator
         self.driver = RunBrowser().driver
-        self.element = elem
+        self.elem = elem
+
+
 
 
     def _find(self, WaitTime = WaitTime):
@@ -28,18 +30,22 @@ class BaseElement(ABC):
         :param WaitTime: time in seconds while the driver will try to find an element
         :return: element
         '''
-        wait = WebDriverWait(self.driver, WaitTime)
+        if self.elem == "":
+            wait = WebDriverWait(self.driver, WaitTime)
+        if self.elem != "":
+            wait = WebDriverWait(self.elem, WaitTime)
 
         try:
             logger.info("Waiting for element" + self.locator)
             wait.until(EC.presence_of_element_located((self.locatorType, self.locator)))
         except TimeoutException:
             logger.warn("Cannot find such an element!" + self.locator)
-        if self.element == "":
+        if self.elem == "":
             self.element = self.driver.find_element(self.locatorType, self.locator)
-        if self.element != "":
-            self.element = self.element.find_element(self.locatorType, self.locator)
+        if self.elem != "":
+            self.element = self.elem.find_element(self.locatorType, self.locator)
         return self.element
+
 
 
     def _finds(self, WaitTime = WaitTime):
@@ -53,9 +59,9 @@ class BaseElement(ABC):
             wait.until(EC.presence_of_element_located((self.locatorType, self.locator)))
         except TimeoutException:
             logger.warn("Cannot find such an element!" + self.locator)
-        if self.element == "":
+        if self.elem == "":
             self.elements = self.driver.find_elements(self.locatorType, self.locator)
-        if self.element != "":
+        if self.elem != "":
             self.elements = self.element.find_elements(self.locatorType, self.locator)
         return self.elements
 
@@ -67,6 +73,7 @@ class BaseElement(ABC):
         self._find()
         logger.info("Trying to click an element")
         self.element.click()
+        return self.element
 
 
     def move(self):

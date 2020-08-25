@@ -10,17 +10,19 @@ from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
 
 CONFIG = 'resources/config.json'
+TESTDATA = 'resources/testdata.json'
 
 SITE = jsonGetter.GetJson.getFile(CONFIG, "SITE")
+testdata1 = jsonGetter.GetJson.getFile(TESTDATA, "testdata1")
+testdata2 = jsonGetter.GetJson.getFile(TESTDATA, "testdata2")
 
 
 
 
 @pytest.mark.usefixtures("get_driver")
 class TestSuite1:
-
-
-    def test_one(self):
+    @pytest.mark.parametrize("img", testdata1)
+    def test_one(self, img):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
         text = mainPage.MainPage().assertPage()
@@ -39,11 +41,9 @@ class TestSuite1:
         pageTwo = gamePage.GamePage().Page2Text
         page = gamePage.GamePage().checkPage()
         assert page == pageTwo, "This is not expected page"
-        gamePage.GamePage().uploadimage()
+        gamePage.GamePage().uploadimage(img)
         gamePage.GamePage().unselectCheckboxes()
-        gamePage.GamePage().selectRandomCheckbox()
-        gamePage.GamePage().selectRandomCheckbox()
-        gamePage.GamePage().selectRandomCheckbox()
+        gamePage.GamePage().selectRandomCheckbox() # TODO: убрать 2 лишних чекбокса
         gamePage.GamePage().clickNext()
 
         gamePage.GamePage().wait3page()
@@ -77,8 +77,8 @@ class TestSuite1:
         assert result == False, "Cookie banner has not been closed"
 
 
-
-    def test_four(self):
+    @pytest.mark.parametrize("time", testdata2)
+    def test_four(self, time):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
         text = mainPage.MainPage().assertPage()
@@ -86,6 +86,5 @@ class TestSuite1:
         assert text == EXtext, "This is not expected page"
         mainPage.MainPage().startGame()
         startTime = gamePage.GamePage().checkTimer()
-        ExpectedTime = gamePage.GamePage().ExpectedTime
-        assert ExpectedTime == startTime, "The countdown does not start from zero"
+        assert time == startTime, "The countdown does not start from zero"
 

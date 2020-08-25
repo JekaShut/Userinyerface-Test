@@ -1,11 +1,11 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
-from framework.Base import BaseForm
+from framework.Base.BaseForm import BaseForm
 from framework.logger.logger import Logger
 logger = Logger(__file__).getlog()
 
 
-class MainPage(): #TODO: наслед от базы
+class MainPage(BaseForm):
     def __init__(self):
         self.startXpath = "//a[@class='start__link']"
         self.EXtext = "HERE"

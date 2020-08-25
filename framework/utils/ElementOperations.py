@@ -66,14 +66,21 @@ class DropDown(BaseElement):
 
 
 class CheckBox(BaseElement):
-     def random(self):
+    def random(self):
         '''
         :return: random element of dropdown
         '''
-        element = self._finds()
-        element = random.choice(element)
-        return element
+        self.element = random.choice(self.elem)
+        return self.element
 
+    def getText(self):
+        '''
+        :return: text of element
+        '''
+        self._find()
+        logger.info("Trying to get text of element")
+        text = self.element.text
+        return text
 
 
 
