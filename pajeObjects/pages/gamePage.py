@@ -23,7 +23,7 @@ class GamePage(BaseForm):
         self.DropDownelements = "//div[@class='dropdown__list-item']"
         self.Checkbox = "//span[@class='checkbox__box']"
         self.CheckboxClick = ""
-        self.CheckboxText = "../../../span[2]"
+        self.CheckboxText = "../../../span[not(@class)]"
         self.select = "Select all"
         self.unselect = "Unselect all"
         self.NextXpath = "//div[@class='align__cell button-container__secondary']/a[@class='button--secondary']"

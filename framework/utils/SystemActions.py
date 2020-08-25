@@ -13,7 +13,6 @@ class SysOperations:
         '''
         pass
 
-
     def upload(self, file):
         time.sleep(2)
         path = os.getcwd() + FILES + file

@@ -17,8 +17,6 @@ testdata1 = jsonGetter.GetJson.getFile(TESTDATA, "testdata1")
 testdata2 = jsonGetter.GetJson.getFile(TESTDATA, "testdata2")
 
 
-
-
 @pytest.mark.usefixtures("get_driver")
 class TestSuite1:
     @pytest.mark.parametrize("img", testdata1)
