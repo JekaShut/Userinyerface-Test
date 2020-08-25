@@ -109,10 +109,6 @@ class GamePage(BaseForm):
         elem.click()
         x.remove(elem)
         elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
-        pass
-
-
-        #ElementOperations.CheckBox(By.XPATH, self.Checkbox, elems).random().click()
 
     def uploadimage(self, img):
         logger.info("Trying to upload an image")

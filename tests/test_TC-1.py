@@ -43,7 +43,7 @@ class TestSuite1:
         assert page == pageTwo, "This is not expected page"
         gamePage.GamePage().uploadimage(img)
         gamePage.GamePage().unselectCheckboxes()
-        gamePage.GamePage().selectRandomCheckbox() # TODO: убрать 2 лишних чекбокса
+        gamePage.GamePage().selectRandomCheckbox()
         gamePage.GamePage().clickNext()
 
         gamePage.GamePage().wait3page()
