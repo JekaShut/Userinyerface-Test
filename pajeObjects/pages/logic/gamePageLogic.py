@@ -2,6 +2,8 @@ from random import choice
 from string import ascii_lowercase, ascii_uppercase
 from string import digits
 import random
+from framework.utils import ElementOperations
+from framework.utils.ElementOperations import By
 
 class Generate():
     @staticmethod
@@ -13,4 +15,15 @@ class Generate():
         random.shuffle(string)
         string = "".join(string)
         return string
+
+    @staticmethod
+    def removeElems(xpath, elems, elem1, elem2):
+        x = []
+        for elem in elems:
+            text = ElementOperations.CheckBox(By.XPATH, xpath, elem).getText()
+            if text == elem1 or text == elem2:
+                pass
+            else:
+                x.append(elem)
+        return x
 

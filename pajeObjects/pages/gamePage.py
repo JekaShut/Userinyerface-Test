@@ -2,6 +2,7 @@ from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
 from framework.Base.BaseForm import BaseForm
 from framework.Base.BaseForm import Check
+from pajeObjects.pages.logic import gamePageLogic
 from framework.common import jsonGetter
 from framework.utils import SystemActions
 from framework.Browser import *
@@ -23,6 +24,8 @@ class GamePage(BaseForm):
         self.Checkbox = "//span[@class='checkbox__box']"
         self.CheckboxClick = ""
         self.CheckboxText = "../../../span[2]"
+        self.select = "Select all"
+        self.unselect = "Unselect all"
         self.NextXpath = "//div[@class='align__cell button-container__secondary']/a[@class='button--secondary']"
         self.Checkboxes = "//div[@class='avatar-and-interests__interests-list__item']"
         self.NextButton = "//button[@class='button button--stroked button--white button--fluid']"
@@ -98,17 +101,15 @@ class GamePage(BaseForm):
     def selectRandomCheckbox(self):
         logger.info("Trying to select a random checkbox")
         elems = ElementOperations.CheckBox(By.XPATH, self.Checkbox)._finds()
-        x = []
-        for elem in elems:
-            text = ElementOperations.CheckBox(By.XPATH, self.CheckboxText, elem).getText()
-            if text == "Select all" or text == "Unselect all":
-                pass
-            else:
-                x.append(elem)
+        x = gamePageLogic.Generate().removeElems(self.CheckboxText, elems, self.select, self.unselect)
+        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random()
+        elem.click()
+        x.remove(elem)
+        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random()
+        elem.click()
+        x.remove(elem)
         elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
-        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
-        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
-
+        pass
 
 
         #ElementOperations.CheckBox(By.XPATH, self.Checkbox, elems).random().click()
