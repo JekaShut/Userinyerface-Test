@@ -33,18 +33,20 @@ class GamePage(BaseForm):
         self.cookiesDiv = "//div[@class='cookies']"
         self.HelpHidden = "//div[@class='help-form is-hidden']"
         self.Pageidentificator = "//div[@class='page-indicator']"
-        self.Page1Text = "1 / 4"
+        self.Page1Text = "1 "
         self.Unic2 = "//p[@class='avatar-and-interests__text']"
         self.Unic3 = "//div[@class='personal-details']"
-        self.Page2Text = "2 / 4"
-        self.Page3Text = "3 / 4"
-        self.Page4Text = "4 / 4"
+        self.Page2Text = "2 "
+        self.Page3Text = "3 "
+        self.Page4Text = "4 "
 
 
     def checkPage(self):
 
         text = ElementOperations.Label(By.XPATH, self.Pageidentificator).getText()
-        return text
+        result = gamePageLogic.Logic().GetPageNumber(text)
+
+        return result
 
     def removeCookie(self):
 

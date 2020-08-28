@@ -4,6 +4,7 @@ from string import digits
 import random
 from framework.utils.ElementOperations import By
 from pajeObjects.pages import gamePage
+import re
 
 class Logic():
     @staticmethod
@@ -44,4 +45,10 @@ class Logic():
             x.remove(elem)
             num -= 1
         return x
+
+    @staticmethod
+    def GetPageNumber(text):
+        pattern = r'\d+\s'
+        result = re.findall(pattern, text)
+        return result[0]
 
