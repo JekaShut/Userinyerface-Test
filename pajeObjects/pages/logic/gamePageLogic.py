@@ -36,3 +36,12 @@ class Logic():
                 x.append(elem)
         return x
 
+    @staticmethod
+    def ClickCheckboxes(x, num):
+        while num != 1:
+            elem = gamePage.GamePage().findRandomCheckbox(x)
+            elem.click()
+            x.remove(elem)
+            num -= 1
+        return x
+

@@ -105,17 +105,15 @@ class GamePage(BaseForm):
         text = ElementOperations.CheckBox(locatorType, locator, elem).getText()
         return text
 
-    def selectRandomCheckbox(self):
+    def findRandomCheckbox(self, x):
+        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random()
+        return elem
+
+    def selectRandomCheckbox(self, num):
         logger.info("Trying to select a random checkbox")
         elems = ElementOperations.CheckBox(By.XPATH, self.Checkbox)._finds()
         x = gamePageLogic.Logic().ReturnValidCheckboxes(self.CheckboxText, elems, self.select, self.unselect)
-
-        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random()
-        elem.click()
-        x.remove(elem)
-        elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random()
-        elem.click()
-        x.remove(elem)
+        x = gamePageLogic.Logic().ClickCheckboxes(x, num)
         elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
 
     def uploadimage(self, img):

@@ -46,7 +46,7 @@ class TestSuite1:
         assert page == pageTwo, "This is not expected page"
         GP.uploadimage(img)
         GP.unselectCheckboxes()
-        GP.selectRandomCheckbox()
+        GP.selectRandomCheckbox(3)
         GP.clickNext()
 
         GP.wait3page()
