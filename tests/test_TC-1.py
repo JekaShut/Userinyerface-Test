@@ -2,7 +2,7 @@ from framework.common import jsonGetter
 from framework.utils import CookieOperations
 from framework.utils.BrowserActions import LinkOperations
 from pajeObjects.pages import mainPage, gamePage
-from pajeObjects.pages.logic.gamePageLogic import Generate
+from pajeObjects.pages.logic.gamePageLogic import Logic
 
 import pytest
 
@@ -25,7 +25,7 @@ class TestSuite1:
     def test_one(self, img):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
-        text = MP.assertPage()
+        text = MP.getText()
         EXtext = MP.EXtext
         assert text == EXtext, "This is not expected page"
 
@@ -33,7 +33,7 @@ class TestSuite1:
         page = GP.checkPage()
         pageOne = GP.Page1Text
         assert page == pageOne, "This is not expected page"
-        passwd = Generate.string()
+        passwd = Logic.generate_string()
         GP.sendCreditals(passwd)
         GP.clickNext()
 
@@ -56,7 +56,7 @@ class TestSuite1:
     def test_two(self):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
-        text = MP.assertPage()
+        text = MP.getText()
         EXtext = MP.EXtext
         assert text == EXtext, "This is not expected page"
         MP.startGame()
@@ -68,7 +68,7 @@ class TestSuite1:
     def test_three(self):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
-        text = MP.assertPage()
+        text = MP.getText()
         EXtext = MP.EXtext
         assert text == EXtext, "This is not expected page"
         MP.startGame()
@@ -81,7 +81,7 @@ class TestSuite1:
     def test_four(self, time):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
-        text = MP.assertPage()
+        text = MP.getText()
         EXtext = MP.EXtext
         assert text == EXtext, "This is not expected page"
         MP.startGame()

@@ -101,7 +101,7 @@ class GamePage(BaseForm):
     def selectRandomCheckbox(self):
         logger.info("Trying to select a random checkbox")
         elems = ElementOperations.CheckBox(By.XPATH, self.Checkbox)._finds()
-        x = gamePageLogic.Generate().removeElems(self.CheckboxText, elems, self.select, self.unselect)
+        x = gamePageLogic.Logic().removeElems(self.CheckboxText, elems, self.select, self.unselect)
         elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random()
         elem.click()
         x.remove(elem)

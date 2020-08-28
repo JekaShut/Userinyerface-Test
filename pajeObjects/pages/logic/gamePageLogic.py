@@ -5,9 +5,9 @@ import random
 from framework.utils import ElementOperations
 from framework.utils.ElementOperations import By
 
-class Generate():
+class Logic():
     @staticmethod
-    def string():
+    def generate_string():
         string1 = [choice(ascii_uppercase) for i in range(4)]
         string2 = [choice(ascii_lowercase) for i in range(4)]
         string3 = [choice(digits) for i in range(4)]

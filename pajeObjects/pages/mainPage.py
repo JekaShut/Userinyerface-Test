@@ -10,7 +10,7 @@ class MainPage(BaseForm):
         self.startXpath = "//a[@class='start__link']"
         self.EXtext = "HERE"
 
-    def assertPage(self):
+    def getText(self):
         logger.info("Trying to get text")
         text = ElementOperations.Button(By.XPATH, self.startXpath).getText()
         return text
