@@ -34,7 +34,10 @@ class TestSuite1:
         pageOne = GP.Page1Text
         assert page == pageOne, "This is not expected page"
         passwd = Logic.generate_string()
-        GP.sendCreditals(passwd)
+        GP.sendCreditalsPassword(passwd)
+        GP.sendCreditalsEmail(passwd)
+        GP.sendCreditalsDomain(passwd)
+        GP.sendCreditalsDropDown()
         GP.clickNext()
 
         GP.wait2page()

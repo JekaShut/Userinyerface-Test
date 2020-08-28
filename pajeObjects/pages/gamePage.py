@@ -73,18 +73,21 @@ class GamePage(BaseForm):
         startTime = ElementOperations.Label(By.XPATH, self.TimerXpath).getText()
         return startTime
 
-    def sendCreditals(self, passwd):
+    def sendCreditalsPassword(self, passwd):
         logger.info("Trying to generate string")
 
         ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).clear()
         ElementOperations.Input(By.XPATH, self.PasswordFieldXpath).send(passwd)
 
+    def sendCreditalsEmail(self, passwd):
         ElementOperations.Input(By.XPATH, self.EmailFieldXpath).clear()
         ElementOperations.Input(By.XPATH, self.EmailFieldXpath).send(passwd)
 
+    def sendCreditalsDomain(self, passwd):
         ElementOperations.Input(By.XPATH, self.DomainFieldXpath).clear()
         ElementOperations.Input(By.XPATH, self.DomainFieldXpath).send(passwd)
 
+    def sendCreditalsDropDown(self):
         ElementOperations.Button(By.XPATH, self.DropDownField).click()
         ElementOperations.DropDown(By.XPATH, self.DropDownelements).random().click()
         ElementOperations.CheckBox(By.XPATH, self.Checkbox).click()
