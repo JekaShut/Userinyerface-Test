@@ -16,6 +16,8 @@ SITE = jsonGetter.GetJson.getFile(CONFIG, "SITE")
 testdata1 = jsonGetter.GetJson.getFile(TESTDATA, "testdata1")
 testdata2 = jsonGetter.GetJson.getFile(TESTDATA, "testdata2")
 
+GP = gamePage.GamePage()
+MP = mainPage.MainPage()
 
 @pytest.mark.usefixtures("get_driver")
 class TestSuite1:
@@ -23,30 +25,30 @@ class TestSuite1:
     def test_one(self, img):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
-        text = mainPage.MainPage().assertPage()
-        EXtext = mainPage.MainPage().EXtext
+        text = MP.assertPage()
+        EXtext = MP.EXtext
         assert text == EXtext, "This is not expected page"
 
-        mainPage.MainPage().startGame()
-        page = gamePage.GamePage().checkPage()
-        pageOne = gamePage.GamePage().Page1Text
+        MP.startGame()
+        page = GP.checkPage()
+        pageOne = GP.Page1Text
         assert page == pageOne, "This is not expected page"
         passwd = Generate.string()
-        gamePage.GamePage().sendCreditals(passwd)
-        gamePage.GamePage().clickNext()
+        GP.sendCreditals(passwd)
+        GP.clickNext()
 
-        gamePage.GamePage().wait2page()
-        pageTwo = gamePage.GamePage().Page2Text
-        page = gamePage.GamePage().checkPage()
+        GP.wait2page()
+        pageTwo = GP.Page2Text
+        page = GP.checkPage()
         assert page == pageTwo, "This is not expected page"
-        gamePage.GamePage().uploadimage(img)
-        gamePage.GamePage().unselectCheckboxes()
-        gamePage.GamePage().selectRandomCheckbox()
-        gamePage.GamePage().clickNext()
+        GP.uploadimage(img)
+        GP.unselectCheckboxes()
+        GP.selectRandomCheckbox()
+        GP.clickNext()
 
-        gamePage.GamePage().wait3page()
-        pageThree = gamePage.GamePage().Page3Text
-        page = gamePage.GamePage().checkPage()
+        GP.wait3page()
+        pageThree = GP.Page3Text
+        page = GP.checkPage()
         assert page == pageThree, "This is not expected page"
 
 
@@ -54,24 +56,24 @@ class TestSuite1:
     def test_two(self):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
-        text = mainPage.MainPage().assertPage()
-        EXtext = mainPage.MainPage().EXtext
+        text = MP.assertPage()
+        EXtext = MP.EXtext
         assert text == EXtext, "This is not expected page"
-        mainPage.MainPage().startGame()
-        gamePage.GamePage().removeHelp()
-        result = gamePage.GamePage().checkHelp()
+        MP.startGame()
+        GP.removeHelp()
+        result = GP.checkHelp()
         assert result == True, "Form is not hidden"
 
 
     def test_three(self):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
-        text = mainPage.MainPage().assertPage()
-        EXtext = mainPage.MainPage().EXtext
+        text = MP.assertPage()
+        EXtext = MP.EXtext
         assert text == EXtext, "This is not expected page"
-        mainPage.MainPage().startGame()
-        elem = gamePage.GamePage().removeCookie()
-        result = gamePage.GamePage().checkCookie(elem)
+        MP.startGame()
+        elem = GP.removeCookie()
+        result = GP.checkCookie(elem)
         assert result == False, "Cookie banner has not been closed"
 
 
@@ -79,10 +81,10 @@ class TestSuite1:
     def test_four(self, time):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
-        text = mainPage.MainPage().assertPage()
-        EXtext = mainPage.MainPage().EXtext
+        text = MP.assertPage()
+        EXtext = MP.EXtext
         assert text == EXtext, "This is not expected page"
-        mainPage.MainPage().startGame()
-        startTime = gamePage.GamePage().checkTimer()
+        MP.startGame()
+        startTime = GP.checkTimer()
         assert time == startTime, "The countdown does not start from zero"
 

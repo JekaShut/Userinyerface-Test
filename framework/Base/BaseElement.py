@@ -16,11 +16,11 @@ WaitTime = jsonGetter.GetJson.getFile(CONFIG, "WaitTime")
 
 class BaseElement(ABC):
 
-    def __init__(self, locatorType, locator, elem=""):
+    def __init__(self, locatorType, locator, parent_elem=""):
         self.locatorType = locatorType
         self.locator = locator
         self.driver = RunBrowser().driver
-        self.elem = elem
+        self.elem = parent_elem
 
 
 
@@ -32,7 +32,7 @@ class BaseElement(ABC):
         '''
         if self.elem == "":
             wait = WebDriverWait(self.driver, WaitTime)
-        if self.elem != "":
+        else:
             wait = WebDriverWait(self.elem, WaitTime)
 
         try:
@@ -42,7 +42,7 @@ class BaseElement(ABC):
             logger.warn("Cannot find such an element!" + self.locator)
         if self.elem == "":
             self.element = self.driver.find_element(self.locatorType, self.locator)
-        if self.elem != "":
+        else:
             self.element = self.elem.find_element(self.locatorType, self.locator)
         return self.element
 
@@ -61,7 +61,7 @@ class BaseElement(ABC):
             logger.warn("Cannot find such an element!" + self.locator)
         if self.elem == "":
             self.elements = self.driver.find_elements(self.locatorType, self.locator)
-        if self.elem != "":
+        else:
             self.elements = self.element.find_elements(self.locatorType, self.locator)
         return self.elements
 
