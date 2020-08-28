@@ -98,10 +98,15 @@ class GamePage(BaseForm):
         logger.info("Trying to click unselect all button")
         ElementOperations.CheckBox(By.XPATH, self.UnselectAll).click()
 
+    def getCheckboxText(self, locatorType, locator, elem):
+        text = ElementOperations.CheckBox(locatorType, locator, elem).getText()
+        return text
+
     def selectRandomCheckbox(self):
         logger.info("Trying to select a random checkbox")
         elems = ElementOperations.CheckBox(By.XPATH, self.Checkbox)._finds()
-        x = gamePageLogic.Logic().removeElems(self.CheckboxText, elems, self.select, self.unselect)
+        x = gamePageLogic.Logic().ReturnValidCheckboxes(self.CheckboxText, elems, self.select, self.unselect)
+
         elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random()
         elem.click()
         x.remove(elem)

@@ -2,8 +2,8 @@ from random import choice
 from string import ascii_lowercase, ascii_uppercase
 from string import digits
 import random
-from framework.utils import ElementOperations
 from framework.utils.ElementOperations import By
+from pajeObjects.pages import gamePage
 
 class Logic():
     @staticmethod
@@ -17,10 +17,19 @@ class Logic():
         return string
 
     @staticmethod
-    def removeElems(xpath, elems, elem1, elem2):
+    def ReturnValidCheckboxes(textXpath, elems, elem1, elem2):
+        '''
+
+        :param textXpath: Xpath of checkboxt titles
+        :param elems: All the checkboxes
+        :param elem1: 1st element to remove from all elements
+        :param elem2: 2nd element to remove from all elements
+        :return: elements without elem1 and elem 2
+        '''
+
         x = []
         for elem in elems:
-            text = ElementOperations.CheckBox(By.XPATH, xpath, elem).getText()
+            text = gamePage.GamePage().getCheckboxText(By.XPATH, textXpath, elem)
             if text == elem1 or text == elem2:
                 pass
             else:
