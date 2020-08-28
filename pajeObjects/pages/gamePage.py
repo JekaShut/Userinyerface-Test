@@ -21,9 +21,11 @@ class GamePage(BaseForm):
         self.DomainFieldXpath = "//input[@placeholder='Domain']"
         self.DropDownField = "//div[@class='dropdown__field']"
         self.DropDownelements = "//div[@class='dropdown__list-item']"
-        self.Checkbox = "//span[@class='checkbox__box']"
+        self.PreCheckboxXpath = "//div[@class='avatar-and-interests__interests-list__item']"
+        self.Checkbox = "/div/span/label"
+        self.StartCheckBox = "//span[@class='checkbox__box']"
         self.CheckboxClick = ""
-        self.CheckboxText = "../../../span[not(@class)]"
+        self.CheckboxText = "/div/span[not(@class)]"
         self.select = "Select all"
         self.unselect = "Unselect all"
         self.NextXpath = "//div[@class='align__cell button-container__secondary']/a[@class='button--secondary']"
@@ -92,7 +94,7 @@ class GamePage(BaseForm):
     def sendCreditalsDropDown(self):
         ElementOperations.Button(By.XPATH, self.DropDownField).click()
         ElementOperations.DropDown(By.XPATH, self.DropDownelements).random().click()
-        ElementOperations.CheckBox(By.XPATH, self.Checkbox).click()
+        ElementOperations.CheckBox(By.XPATH, self.StartCheckBox).click()
         ElementOperations.Button(By.XPATH, self.NextXpath).click()
 
     def clickNext(self):
@@ -113,8 +115,10 @@ class GamePage(BaseForm):
 
     def selectRandomCheckbox(self, num):
         logger.info("Trying to select a random checkbox")
-        elems = ElementOperations.CheckBox(By.XPATH, self.Checkbox)._finds()
-        x = gamePageLogic.Logic().ReturnValidCheckboxes(self.CheckboxText, elems, self.select, self.unselect)
+        path = self.PreCheckboxXpath + self.Checkbox
+        pathtext = self.PreCheckboxXpath + self.CheckboxText
+        elems = ElementOperations.CheckBox(By.XPATH, path)._finds()
+        x = gamePageLogic.Logic().ReturnValidCheckboxes(pathtext, elems, self.select, self.unselect)
         x = gamePageLogic.Logic().ClickCheckboxes(x, num)
         elem = ElementOperations.CheckBox(By.XPATH, self.CheckboxClick, x).random().click()
 
