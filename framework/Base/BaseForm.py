@@ -9,7 +9,6 @@ class BaseForm():
     def __init__(self, elem= ""):
         self.elem = elem
 
-class Check(BaseForm):
     def isDisplayed(self):
         try:
             logger.info("Checking that element " + str(self.elem) + " is displayed")

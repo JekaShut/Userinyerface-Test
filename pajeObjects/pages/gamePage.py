@@ -1,7 +1,7 @@
 from framework.utils import ElementOperations
 from selenium.webdriver.common.by import By
 from framework.Base.BaseForm import BaseForm
-from framework.Base.BaseForm import Check
+#from framework.Base.BaseForm import Check
 from pajeObjects.pages.logic import gamePageLogic
 from framework.common import jsonGetter
 from framework.utils import SystemActions
@@ -25,7 +25,7 @@ class GamePage(BaseForm):
         self.Checkbox = "/div/span/label"
         self.StartCheckBox = "//span[@class='checkbox__box']"
         self.CheckboxClick = ""
-        self.CheckboxText = "/div/span[not(@class)]"
+        self.CheckboxText = "/div/span[not(@class)]" #ansector::
         self.select = "Select all"
         self.unselect = "Unselect all"
         self.NextXpath = "//div[@class='align__cell button-container__secondary']/a[@class='button--secondary']"
@@ -58,7 +58,7 @@ class GamePage(BaseForm):
 
     def checkCookie(self, elem):
 
-        result = Check(elem).isDisplayed()
+        result = BaseForm(elem).isDisplayed()
         return result
 
     def removeHelp(self):
@@ -68,7 +68,7 @@ class GamePage(BaseForm):
 
     def checkHelp(self):
         elem = ElementOperations.Form(By.XPATH, self.HelpHidden)._find()
-        result = Check(elem).isDisplayed()
+        result = BaseForm(elem).isDisplayed()
 
         return result
 
