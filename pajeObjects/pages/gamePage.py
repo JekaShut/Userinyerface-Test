@@ -42,6 +42,8 @@ class GamePage(BaseForm):
         self.Page3Text = "3 "
         self.Page4Text = "4 "
 
+        self.elemGetText = ElementOperations.Label(By.XPATH, "Xpath here")
+
 
     def checkPage(self):
 

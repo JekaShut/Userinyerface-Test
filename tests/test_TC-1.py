@@ -3,7 +3,7 @@ from framework.utils import CookieOperations
 from framework.utils.BrowserActions import LinkOperations
 from pajeObjects.pages import mainPage, gamePage
 from pajeObjects.pages.logic.gamePageLogic import Logic
-
+from pytest_testrail.plugin import pytestrail
 import pytest
 
 from framework.logger.logger import Logger
@@ -21,6 +21,7 @@ MP = mainPage.MainPage()
 
 @pytest.mark.usefixtures("get_driver")
 class TestSuite1:
+    @pytestrail.case('C19380774')
     @pytest.mark.parametrize("img", testdata1)
     def test_one(self, img):
         logger.info("Trying to open site " + SITE)
@@ -54,8 +55,7 @@ class TestSuite1:
         page = GP.checkPage()
         assert page == pageThree, "This is not expected page"
 
-
-
+    @pytestrail.case('C19380775')
     def test_two(self):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
@@ -67,7 +67,7 @@ class TestSuite1:
         result = GP.checkHelp()
         assert result == True, "Form is not hidden"
 
-
+    @pytestrail.case('C19380776')
     def test_three(self):
         logger.info("Trying to open site " + SITE)
         LinkOperations(SITE).get()
@@ -79,7 +79,7 @@ class TestSuite1:
         result = GP.checkCookie(elem)
         assert result == False, "Cookie banner has not been closed"
 
-
+    @pytestrail.case('C19380777')
     @pytest.mark.parametrize("time", testdata2)
     def test_four(self, time):
         logger.info("Trying to open site " + SITE)
